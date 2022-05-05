@@ -1,17 +1,17 @@
 type Quote {
-  id: ID!
+    id: ID!
 
-  quote: String!
+    quote: String!
 
-  author: String!
+    author: String!
 }
 
 type Query {
-  quotes: [Quote!]!
+    quotes: [Quote!]!
 
-  randomQuote: Quote!
+    randomQuote: Quote!
 }
 
 schema {
-  query: Query
+    query: Query
 }

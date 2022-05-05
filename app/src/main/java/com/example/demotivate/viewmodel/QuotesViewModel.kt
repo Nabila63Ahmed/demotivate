@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.demotivate.QuotesQuery
 
-class QuotesViewModel: ViewModel() {
+class QuotesViewModel : ViewModel() {
 
     private lateinit var quotes: List<QuotesQuery.Quote>
     private val quoteData = MutableLiveData<QuotesQuery.Quote>()
 
-    fun setQuotes (quotes: List<QuotesQuery.Quote>) {
-        this.quotes =  quotes
+    fun setQuotes(quotes: List<QuotesQuery.Quote>) {
+        this.quotes = quotes
     }
 
-    fun updateAndGetQuoteData (): LiveData<QuotesQuery.Quote> {
+    fun updateAndGetQuoteData(): LiveData<QuotesQuery.Quote> {
         val currentIndex = randomIndex(quotes.size)
 
         quoteData.value = quotes[currentIndex]
@@ -23,4 +23,4 @@ class QuotesViewModel: ViewModel() {
     }
 }
 
-fun randomIndex (size: Int) = (0 until size).random()
+fun randomIndex(size: Int) = (0 until size).random()
