@@ -11,7 +11,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.demotivate.QuotesQuery
 import com.example.demotivate.R
-import com.example.demotivate.apolloClient
+import com.example.demotivate.graphql.apolloClient
 import com.example.demotivate.viewmodel.QuotesViewModel
 
 class MainActivity : AppCompatActivity() {

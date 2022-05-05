@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.demotivate.QuotesQuery
-import com.example.demotivate.adapter.QuotesQuery_ResponseAdapter
 
 class QuotesViewModel: ViewModel() {
 

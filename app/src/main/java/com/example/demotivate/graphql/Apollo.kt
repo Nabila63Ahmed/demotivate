@@ -1,4 +1,4 @@
-package com.example.demotivate
+package com.example.demotivate.graphql
 
 import com.apollographql.apollo3.ApolloClient
 
