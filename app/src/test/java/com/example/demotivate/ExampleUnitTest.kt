@@ -1,5 +1,6 @@
 package com.example.demotivate
 
+import com.example.demotivate.viewmodel.randomIndex
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -11,7 +12,8 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun random_inRange() {
+        val randNumber = randomIndex(6)
+        assertTrue("The value of randNumber was not between 1 and 6", randNumber in 0 until 6)
     }
 }

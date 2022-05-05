@@ -18,6 +18,6 @@ class QuotesViewModel: ViewModel() {
 
         return quoteData
     }
-
-    private fun randomIndex (size: Int) = (0 until size).random()
 }
+
+fun randomIndex (size: Int) = (0 until size).random()
