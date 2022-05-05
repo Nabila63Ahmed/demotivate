@@ -5,21 +5,19 @@
   <h1>Demotivate</h1>
 
   <div align="center">
-    <b>Get motivated with hilarious "de"motivational quotes! 😎
-</b>
+    <b>Because motivational quotes are too mainstream 😎</b>
   </div>
 </div>
 
-### Description
+## Description
 
-An Android application that displays a random demotivational quote from
-the [Demotivational Quotes GraphQL API](https://github.com/aravindasiva/demotivational-quotes-api) with a click of a
-button.
+An Android application that shows the user random demotivational quotes fetched from
+the [Demotivational Quotes GraphQL API](https://github.com/aravindasiva/demotivational-quotes-api).
 
-### Architecture
+## Architecture
 
 The application follows the Model, View, ViewModel (MVVM) software architectural pattern.
-With the following <b>file and directory structure</b>:
+With the following file and directory structure:
 
 ```
 📦app
@@ -39,33 +37,20 @@ With the following <b>file and directory structure</b>:
  ┗ ..
 ```
 
-#### 1. Model:
+### Model
 
-- Given a GraphQL schema and query definition the Apollo kotlin plugin defines a task named `generateApolloSources` to
+- Given a GraphQL schema and query definition, the Apollo Kotlin plugin defines a Gradle task named `generateApolloSources` to
   generate the models
 
-#### 2. View:
+### View
 
-- Fetches all quotes through the apollo client and sends them to the viewModel
+- Fetches all quotes via Apollo client and sends them to the ViewModel
 - Controls the application's display of the quotes and interaction with the user through the button
-- Triggering and Subscribing to the viewModel's <b>LiveData</b> updates
+- Triggers and subscribes to the ViewModel's `LiveData` updates
 
-#### 3. ViewModel:
+### ViewModel
 
-- Updates the <b>MutableLiveData</b> with a random quote
+- Updates the `MutableLiveData` with a random quote
 
-### Testing
-
-Random generation functional test:
-
-```kotlin
-@Test
-fun randomNumber_inRange() {
-    val randomNumber = randomIndex(6)
-    assertTrue(
-        "randomNumber is not in range!",
-        randomNumber in 0 until 6
-    )
-} 
-```
+## Screenshots
 
