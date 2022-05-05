@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
                 quoteTextView.visibility = View.VISIBLE
                 authorTextView.visibility = View.VISIBLE
             }
+            model.updateAndGetQuoteData().observe(this) { currentQuote ->
+                "\"${currentQuote.quote}\"".also { quoteTextView.text = it }
+                "- ${currentQuote.author}".also { authorTextView.text = it }
+            }
         }
 
     }
