@@ -12,8 +12,8 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun random_inRange() {
-        val randNumber = randomIndex(6)
-        assertTrue("The value of randNumber was not between 1 and 6", randNumber in 0 until 6)
+    fun randomNumber_inRange() {
+        val randomNumber = randomIndex(6)
+        assertTrue("The value of randomNumber was not between 1 and 6", randomNumber in 0 until 6)
     }
 }
