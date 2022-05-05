@@ -12,12 +12,12 @@ class QuotesViewModel: ViewModel() {
     private val quotes = QuotesProvider().getQuotes()
 
     fun updateAndGetQuoteData (): LiveData<Quote> {
-        val currentIndex = (0 until quotes.size).random()
+        val currentIndex = randomIndex(quotes.size)
 
         quoteData.value = quotes[currentIndex]
 
         return quoteData
     }
 
-    fun randomIndex (size: Int) = (0 until size).random()
+    private fun randomIndex (size: Int) = (0 until size).random()
 }
