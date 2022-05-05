@@ -10,7 +10,6 @@ class QuotesViewModel: ViewModel() {
 
     private lateinit var quotes: List<QuotesQuery.Quote>
     private val quoteData = MutableLiveData<QuotesQuery.Quote>()
-//    private val quotes = QuotesProvider().getQuotes()
 
     fun setQuotes (quotes: List<QuotesQuery.Quote>) {
         this.quotes =  quotes
