@@ -1,4 +1,7 @@
 package com.example.demotivate.model
 
-class Quote {
-}
+data class Quote (
+    val id: Int,
+    val quote: String,
+    val author: String
+    )
