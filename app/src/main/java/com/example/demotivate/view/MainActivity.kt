@@ -13,7 +13,6 @@ import com.example.demotivate.QuotesQuery
 import com.example.demotivate.R
 import com.example.demotivate.apolloClient
 import com.example.demotivate.viewmodel.QuotesViewModel
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,10 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        this.lifecycleScope.launchWhenResumed {
-            val response = apolloClient.query(QuotesQuery()).execute()
-            Log.d("QuotesList", "Success ${response.data}")
-        }
+        getQuotesQuery()
 
         val demotivateButton: Button = findViewById(R.id.button)
         demotivateButton.setOnClickListener {
@@ -38,11 +34,20 @@ class MainActivity : AppCompatActivity() {
                 quoteTextView.visibility = View.VISIBLE
                 authorTextView.visibility = View.VISIBLE
             }
+
             model.updateAndGetQuoteData().observe(this) { currentQuote ->
                 "\"${currentQuote.quote}\"".also { quoteTextView.text = it }
                 "- ${currentQuote.author}".also { authorTextView.text = it }
             }
         }
 
+    }
+
+    private fun getQuotesQuery () {
+        this.lifecycleScope.launchWhenResumed {
+            val response = apolloClient.query(QuotesQuery()).execute()
+            Log.d("QuotesList", "Success ${response.data}")
+            response.data?.let { model.setQuotes(it.quotes) }
+        }
     }
 }
