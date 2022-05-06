@@ -14,8 +14,8 @@ import com.example.demotivate.graphql.apolloClient
 import com.example.demotivate.viewmodel.QuotesViewModel
 
 class MainActivity : AppCompatActivity() {
-
     private val model: QuotesViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Uses the Apollo client to fetch all the quotes and posts them to the viewModel
-     * */
+     * Uses the Apollo client to fetch all quotes and posts them to the ViewModel.
+     */
     private fun getQuotesQuery() {
         this.lifecycleScope.launchWhenResumed {
             val response = apolloClient.query(QuotesQuery()).execute()

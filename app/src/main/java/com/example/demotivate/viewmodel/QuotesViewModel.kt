@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.demotivate.QuotesQuery
 
 class QuotesViewModel : ViewModel() {
-
     private lateinit var quotes: List<QuotesQuery.Quote>
     private val quoteData = MutableLiveData<QuotesQuery.Quote>()
 
@@ -15,11 +14,10 @@ class QuotesViewModel : ViewModel() {
     }
 
     /*
-    * Triggered by the view, randomly picks a quote and updates the MutableLiveData
-    * */
+     * Picks a quote at random and updates the MutableLiveData.
+     */
     fun updateAndGetQuoteData(): LiveData<QuotesQuery.Quote> {
         val currentIndex = randomIndex(quotes.size)
-
         quoteData.value = quotes[currentIndex]
 
         return quoteData
@@ -27,6 +25,6 @@ class QuotesViewModel : ViewModel() {
 }
 
 /*
-* Given an array size, it returns a random number within the indices of the array
-* */
+* Given an array size, it returns a random number within the indices of the array.
+*/
 fun randomIndex(size: Int) = (0 until size).random()
