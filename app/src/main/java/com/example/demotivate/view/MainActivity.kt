@@ -21,9 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getQuotesQuery()
-
         val demotivateButton: Button = findViewById(R.id.button)
+
+        demotivateButton.isEnabled = false
+        getQuotesQuery()
+        demotivateButton.isEnabled = true
+
         demotivateButton.setOnClickListener {
             val initialTextView: TextView = findViewById(R.id.initialTextView)
             val quoteTextView: TextView = findViewById(R.id.quoteTextView)
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             model.updateAndGetQuoteData().observe(this) { currentQuote ->
-                "\"${currentQuote.quote}\"".also { quoteTextView.text = it }
+                "\" ${currentQuote.quote}\"".also { quoteTextView.text = it }
                 "- ${currentQuote.author}".also { authorTextView.text = it }
             }
         }
