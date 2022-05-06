@@ -1,6 +1,7 @@
 package com.example.demotivate.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -8,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.apollographql.apollo3.exception.ApolloException
 import com.example.demotivate.QuotesQuery
 import com.example.demotivate.R
 import com.example.demotivate.graphql.apolloClient
@@ -22,10 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         val demotivateButton: Button = findViewById(R.id.button)
 
-        // Disable the button until quotes are fetched
         demotivateButton.isEnabled = false
         getQuotesQuery()
-        demotivateButton.isEnabled = true
 
         demotivateButton.setOnClickListener {
             val initialTextView: TextView = findViewById(R.id.initialTextView)
@@ -48,12 +48,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Uses the Apollo client to fetch all quotes and posts them to the ViewModel.
+     * Uses the Apollo client to fetch all quotes, posts them to the ViewModel
+     * and enables the click button.
      */
     private fun getQuotesQuery() {
+        val demotivateButton: Button = findViewById(R.id.button)
+
         this.lifecycleScope.launchWhenResumed {
-            val response = apolloClient.query(QuotesQuery()).execute()
-            response.data?.let { model.setQuotes(it.quotes) }
+            try {
+                val response = apolloClient.query(QuotesQuery()).execute()
+                response.data?.let { model.setQuotes(it.quotes) }
+
+                demotivateButton.isEnabled = true
+            } catch (exception: ApolloException) {
+                Log.d("QuotesList", "Unable to fetch quotes", exception)
+            }
         }
     }
 }
