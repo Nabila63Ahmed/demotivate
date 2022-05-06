@@ -14,6 +14,9 @@ class QuotesViewModel : ViewModel() {
         this.quotes = quotes
     }
 
+    /*
+    * Triggered by the view, randomly picks a quote and updates the MutableLiveData
+    * */
     fun updateAndGetQuoteData(): LiveData<QuotesQuery.Quote> {
         val currentIndex = randomIndex(quotes.size)
 
@@ -23,4 +26,7 @@ class QuotesViewModel : ViewModel() {
     }
 }
 
+/*
+* Given an array size, it returns a random number within the indices of the array
+* */
 fun randomIndex(size: Int) = (0 until size).random()

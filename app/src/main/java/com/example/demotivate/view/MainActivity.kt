@@ -1,7 +1,6 @@
 package com.example.demotivate.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -23,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         val demotivateButton: Button = findViewById(R.id.button)
 
+        // Disable the button until quotes are fetched
         demotivateButton.isEnabled = false
         getQuotesQuery()
         demotivateButton.isEnabled = true
@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             val quoteTextView: TextView = findViewById(R.id.quoteTextView)
             val authorTextView: TextView = findViewById(R.id.authorTextView)
 
+            // In case of having the initial display, a change in displayed elements is required
             if (initialTextView.isVisible) {
                 initialTextView.visibility = View.INVISIBLE
                 quoteTextView.visibility = View.VISIBLE
@@ -46,10 +47,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Uses the Apollo client to fetch all the quotes and posts them to the viewModel
+     * */
     private fun getQuotesQuery() {
         this.lifecycleScope.launchWhenResumed {
             val response = apolloClient.query(QuotesQuery()).execute()
-            Log.d("QuotesList", "Success ${response.data}")
             response.data?.let { model.setQuotes(it.quotes) }
         }
     }
