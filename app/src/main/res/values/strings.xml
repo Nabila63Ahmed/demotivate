@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">demotivate</string>
+    <string name="app_name">Demotivate</string>
     <string name="click">Click</string>
-    <string name="initialTextView">Click here to get \"de\"motivated</string>
+    <string name="initialTextView">Get your daily dose of demotivation 🤦‍♂️</string>
     <string name="quoteTextView">Click here to get \"de\"motivated</string>
     <string name="authorTextView">-Author</string>
 </resources>
