@@ -24,6 +24,10 @@ With the following file and directory structure:
  ┣ ..
  ┣ 📂src
  ┃ ┣ 📂main
+ ┃ ┃ ┣ 📂graphql
+ ┃ ┃ ┃ ┣ 📂queries
+ ┃ ┃ ┃ ┃ ┗ 📜quotes.graphql
+ ┃ ┃ ┃ ┗ 📜schema.graphqls
  ┃ ┃ ┣ 📂java
  ┃ ┃ ┃ ┗ 📂com.example.demotivate
  ┃ ┃ ┃    ┣ 📂graphql
@@ -53,4 +57,10 @@ With the following file and directory structure:
 - Updates the `MutableLiveData` with a random quote
 
 ## Screenshots
+
+<span>
+  <img src="docs/screenshots/Screenshot_first.png" width="300"/>
+
+  <img src="docs/screenshots/Screenshot_example.png" width="300"/>
+</span>
 
