@@ -1,13 +1,11 @@
 package com.example.demotivate.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.apollographql.apollo3.exception.ApolloException
 import com.example.demotivate.QuotesQuery
-import com.example.demotivate.graphql.apolloClient
+import com.example.demotivate.graphql.QuotesProvider
 import kotlinx.coroutines.launch
 
 class QuotesViewModel : ViewModel() {
@@ -15,16 +13,11 @@ class QuotesViewModel : ViewModel() {
     private val quoteData = MutableLiveData<QuotesQuery.Quote>()
 
     /**
-     * Uses the Apollo client to fetch all quotes and sets them to the ViewModel quotes.
+     * Sets the ViewModel quotes to the fetched quotes by the Provider.
      */
     fun getQuotesFromAPI() {
         viewModelScope.launch {
-            try {
-                val response = apolloClient.query(QuotesQuery()).execute()
-                response.data?.let { quotes = it.quotes }
-            } catch (exception: ApolloException) {
-                Log.d("QuotesList", "Unable to fetch quotes", exception)
-            }
+            quotes = QuotesProvider().getQuotesFromApollo()!!
         }
     }
 
