@@ -39,7 +39,9 @@ class MainActivity : AppCompatActivity() {
                 authorTextView.visibility = View.VISIBLE
             }
 
-            model.updateAndGetQuoteData().observe(this) { currentQuote ->
+            val currentQuote: QuotesQuery.Quote? = model.updateAndGetQuoteData().value
+
+            if (currentQuote != null) {
                 "\" ${currentQuote.quote}\"".also { quoteTextView.text = it }
                 "- ${currentQuote.author}".also { authorTextView.text = it }
             }
