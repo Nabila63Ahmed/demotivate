@@ -8,7 +8,6 @@
         tools:context=".view.MainActivity" android:background="#009688">
     <Button
             android:text="@string/click"
-            android:layout_width="118dp"
             android:layout_height="68dp" android:id="@+id/button"
             android:layout_marginEnd="147dp"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
@@ -16,46 +15,14 @@
             android:layout_marginBottom="147dp" android:textSize="20sp" android:fontFamily="@font/roboto_slab"
             android:textAlignment="center" android:background="#9C27B0"
             android:textColor="@android:color/white"
-            tools:ignore="TextContrastCheck"/>
-    <TextView
-            android:text="@string/initialTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/initialTextView"
-            android:visibility="visible"
-            android:textSize="36sp"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0" android:textColor="@android:color/white"
-            android:fontFamily="@font/roboto_slab" android:typeface="normal" android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
-    <TextView
-            android:text="@string/quoteTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" android:id="@+id/quoteTextView"
-            android:textSize="30sp"
-            android:textAlignment="center"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp"
-            android:fontFamily="@font/roboto_slab" android:typeface="normal"
-            android:textStyle="bold|italic" tools:visibility="visible" android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/button" app:layout_constraintVertical_bias="0.501"/>
-    <TextView
-            android:text="@string/authorTextView"
-            android:layout_width="127dp"
-            android:layout_height="56dp" android:id="@+id/authorTextView"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:textColor="@android:color/white"
-            android:layout_marginEnd="20dp"
-            android:fontFamily="@font/roboto_slab" android:typeface="normal" android:textAllCaps="false"
-            android:textStyle="bold|italic" tools:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="invisible"
-            app:layout_constraintTop_toBottomOf="@+id/quoteTextView" app:layout_constraintVertical_bias="0.427"
-            android:layout_marginTop="25dp" app:layout_constraintBottom_toTopOf="@+id/button"/>
+            tools:ignore="TextContrastCheck" app:layout_constraintTop_toBottomOf="@+id/flFragment"
+            app:layout_constraintHorizontal_bias="0.5" android:layout_width="0dp"/>
+
+    <FrameLayout
+            android:id="@+id/flFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

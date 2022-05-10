@@ -21,6 +21,8 @@ class QuotesViewModel : ViewModel() {
         }
     }
 
+    fun getFirstQuote() = quotes.random()
+
     /**
      * Picks a quote at random and updates the MutableLiveData.
      */
