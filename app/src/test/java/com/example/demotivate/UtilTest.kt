@@ -1,6 +1,7 @@
 package com.example.demotivate
 
 import com.google.common.truth.Truth.assertThat
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class UtilTest {
@@ -14,10 +15,10 @@ class UtilTest {
 
     @Test
     fun `empty range exception thrown for invalid bound`() {
-        try {
+        val exception = assertThrows(Exception::class.java) {
             Util.generateRandomNumber(0)
-        } catch (exception: Exception) {
-            assertThat(exception).hasMessageThat().contains("Empty range")
         }
+
+        assertThat(exception.message).isEqualTo("Empty range")
     }
 }
