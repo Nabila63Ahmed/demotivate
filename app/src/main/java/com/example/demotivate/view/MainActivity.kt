@@ -1,7 +1,6 @@
 package com.example.demotivate.view
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.demotivate.R
@@ -40,13 +39,8 @@ class MainActivity : AppCompatActivity() {
                         commit()
                     }
                 } else {
-                    val quoteTextView: TextView? = quoteFragment.view?.findViewById(R.id.quoteTextView)
-                    val authorTextView: TextView? = quoteFragment.view?.findViewById(R.id.authorTextView)
-
-                    currentQuote?.let {
-                        "\" ${it.quote}\"".also { it -> quoteTextView?.text = it }
-                        "- ${it.author}".also { it -> authorTextView?.text = it }
-                    }
+                    "\" ${currentQuote.quote}\"".also { quoteFragment.binding.quoteTextView.text = it }
+                    "- ${currentQuote.author}".also { quoteFragment.binding.authorTextView.text = it }
                 }
             }
         }

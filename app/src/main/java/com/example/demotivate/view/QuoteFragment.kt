@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.demotivate.R
+import com.example.demotivate.databinding.FragmentQuoteBinding
 import com.example.demotivate.viewmodel.QuotesViewModel
 
 
@@ -16,30 +15,21 @@ import com.example.demotivate.viewmodel.QuotesViewModel
  */
 class QuoteFragment : Fragment() {
     private val model: QuotesViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    lateinit var binding: FragmentQuoteBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quote, container, false)
+    ): View {
+        binding = FragmentQuoteBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val quoteTextView = view.findViewById<TextView>(R.id.quoteTextView)
-        val authorTextView = view.findViewById<TextView>(R.id.authorTextView)
 
         val firstQuote = model.getFirstQuote()
-        firstQuote.let {
-            "\" ${it.quote}\"".also { it -> quoteTextView?.text = it }
-            "- ${it.author}".also { it -> authorTextView?.text = it }
-        }
-//        quoteTextView.text = firstQuote.quote
-//        authorTextView.text = firstQuote.author
+        "\" ${firstQuote.quote} \"".also { binding.quoteTextView.text = it }
+        "- ${firstQuote.author}".also { binding.authorTextView.text = it }
     }
 }
