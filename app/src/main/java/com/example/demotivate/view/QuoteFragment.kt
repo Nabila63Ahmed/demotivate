@@ -29,7 +29,13 @@ class QuoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val firstQuote = model.getFirstQuote()
-        "\" ${firstQuote.quote} \"".also { binding.quoteTextView.text = it }
+        "\"${
+            firstQuote.quote
+                .replace("\"", "")
+                .replace("\u201C", "")
+                .replace("\u201D", "")
+        }\""
+            .also { binding.quoteTextView.text = it }
         "- ${firstQuote.author}".also { binding.authorTextView.text = it }
     }
 }

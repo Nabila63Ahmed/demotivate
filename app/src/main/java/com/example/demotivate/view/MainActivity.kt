@@ -39,7 +39,13 @@ class MainActivity : AppCompatActivity() {
                         commit()
                     }
                 } else {
-                    "\" ${currentQuote.quote}\"".also { quoteFragment.binding.quoteTextView.text = it }
+                    "\"${
+                        currentQuote.quote
+                            .replace("\"", "")
+                            .replace("\u201C", "")
+                            .replace("\u201D", "")
+                    }\""
+                        .also { quoteFragment.binding.quoteTextView.text = it }
                     "- ${currentQuote.author}".also { quoteFragment.binding.authorTextView.text = it }
                 }
             }
