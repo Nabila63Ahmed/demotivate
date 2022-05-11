@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.demotivate.QuotesQuery.Quote
+import com.example.demotivate.Util
 import com.example.demotivate.graphql.QuotesProvider
 import kotlinx.coroutines.launch
 
@@ -27,7 +28,7 @@ class QuotesViewModel : ViewModel() {
      * Picks a quote at random and updates the MutableLiveData.
      */
     fun updateAndGetQuoteData(): LiveData<Quote> {
-        quoteData.value = quotes.random()
+        quoteData.value = quotes[Util.generateRandomNumber(quotes.size)]
 
         return quoteData
     }
