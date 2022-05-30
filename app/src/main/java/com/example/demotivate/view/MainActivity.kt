@@ -1,67 +1,60 @@
 package com.example.demotivate.view
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
-import com.apollographql.apollo3.exception.ApolloException
-import com.example.demotivate.QuotesQuery
 import com.example.demotivate.R
-import com.example.demotivate.graphql.apolloClient
+import com.example.demotivate.data.db.QuotesDatabase
+import com.example.demotivate.data.repositories.QuotesRepository
+import com.example.demotivate.databinding.ActivityMainBinding
 import com.example.demotivate.viewmodel.QuotesViewModel
+import com.example.demotivate.viewmodel.QuotesViewModelFactory
 
 class MainActivity : AppCompatActivity() {
-    private val model: QuotesViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val demotivateButton: Button = findViewById(R.id.button)
+        val db = QuotesDatabase(this)
+        val repository = QuotesRepository(db)
+        val factory = QuotesViewModelFactory(repository)
 
-        demotivateButton.isEnabled = false
-        getQuotesQuery()
+        val model: QuotesViewModel by viewModels { factory }
+        val initialFragment = InitialFragment()
+        val quoteFragment = QuoteFragment()
 
-        demotivateButton.setOnClickListener {
-            val initialTextView: TextView = findViewById(R.id.initialTextView)
-            val quoteTextView: TextView = findViewById(R.id.quoteTextView)
-            val authorTextView: TextView = findViewById(R.id.authorTextView)
+        var isFirstClick = true
 
-            // In case of having the initial display, a change in displayed elements is required
-            if (initialTextView.isVisible) {
-                initialTextView.visibility = View.INVISIBLE
-                quoteTextView.visibility = View.VISIBLE
-                authorTextView.visibility = View.VISIBLE
-            }
-
-            model.updateAndGetQuoteData().observe(this) { currentQuote ->
-                "\" ${currentQuote.quote}\"".also { quoteTextView.text = it }
-                "- ${currentQuote.author}".also { authorTextView.text = it }
-            }
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, initialFragment)
+            commit()
         }
 
-    }
+        binding.button.isEnabled = false
+        model.getQuotesFromAPI()
+        binding.button.isEnabled = true
 
-    /**
-     * Uses the Apollo client to fetch all quotes, posts them to the ViewModel
-     * and enables the click button.
-     */
-    private fun getQuotesQuery() {
-        val demotivateButton: Button = findViewById(R.id.button)
-
-        this.lifecycleScope.launchWhenResumed {
-            try {
-                val response = apolloClient.query(QuotesQuery()).execute()
-                response.data?.let { model.setQuotes(it.quotes) }
-
-                demotivateButton.isEnabled = true
-            } catch (exception: ApolloException) {
-                Log.d("QuotesList", "Unable to fetch quotes", exception)
+        binding.button.setOnClickListener {
+            model.updateAndGetQuoteData().observe(this) { currentQuote ->
+                if (isFirstClick) {
+                    isFirstClick = false
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.flFragment, quoteFragment)
+                        commit()
+                    }
+                } else {
+                    "\"${
+                        currentQuote.quote
+                            .replace("\"", "")
+                            .replace("\u201C", "")
+                            .replace("\u201D", "")
+                    }\""
+                        .also { quoteFragment.binding.quoteTextView.text = it }
+                    "- ${currentQuote.author}".also { quoteFragment.binding.authorTextView.text = it }
+                }
             }
         }
     }
